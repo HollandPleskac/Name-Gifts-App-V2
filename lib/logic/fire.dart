@@ -152,7 +152,7 @@ class Fire {
         .then(
           (querySnap) => querySnap.documents.length,
         );
-    print('is event empty? :::::: ::: ::: ' + membersRemaining.toString());
+
     if (membersRemaining == 1) {
       _firestore
           .collection('events')

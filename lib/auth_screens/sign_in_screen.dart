@@ -56,13 +56,19 @@ class _SignInScreenState extends State<SignInScreen> {
         authPackage[1],
         authPackage[2],
       );
-
-      Navigator.push(
+      // Push Replacement deletes the screen out of stack - so no using back arrow (android) to go back to the sign in page
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => TabPage(),
         ),
       );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => TabPage(),
+      //   ),
+      // );
     } else {
       setState(() {
         errorMessage = authPackage[0];

@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Duration(seconds: 2),
       // () async => getUser() == null ||
       //         await getUser() == '' ||
-      //         
+      //
       //     ? Navigator.push(
       //         context,
       //         MaterialPageRoute(
@@ -39,12 +39,12 @@ class _SplashScreenState extends State<SplashScreen> {
       //           builder: (context) => TabPage(),
       //         ),
       //       ),
-      () async => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SignInScreen(),
-              ),
-            )
+      () async => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SignInScreen(),
+        ),
+      ),
     );
   }
 
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Hero(
               tag: 'dash',
               child: Container(
-                width: MediaQuery.of(context).size.width*0.45,
+                width: MediaQuery.of(context).size.width * 0.45,
                 child: Image.asset('assets/images/gift.png'),
               ),
             ),

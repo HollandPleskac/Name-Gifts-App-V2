@@ -54,15 +54,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
           authPackage[1],
           authPackage[2],
         );
-        print('auth 1 ' + authPackage[1],);
-        print('auth 2 '+ authPackage[2],);
+        print(
+          'auth 1 ' + authPackage[1],
+        );
+        print(
+          'auth 2 ' + authPackage[2],
+        );
 
-        Navigator.push(
+        // no using back arrow (android) to go from the tab page back to the sign up
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => TabPage(),
           ),
         );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => TabPage(),
+        //   ),
+        // );
       } else {
         setState(() {
           errorMessage = authPackage[0];
