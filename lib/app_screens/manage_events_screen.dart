@@ -675,6 +675,7 @@ Widget topBarButton(BuildContext context, String buttonTitle,
             width: 160,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
+                //TODO : why button title????
                 color: buttonTitle == 'Invite to Event' &&
                         (selectedEventId == 'no selected event' ||
                             selectedEventId == '')

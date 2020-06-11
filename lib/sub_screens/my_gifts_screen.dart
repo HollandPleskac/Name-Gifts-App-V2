@@ -510,7 +510,7 @@ class _AddGiftFormState extends State<AddGiftForm> {
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: AddGiftTextEntry(
-                hintText: 'Gift Link',
+                hintText: 'Gift Link (copy paste)',
                 icon: Icon(Icons.link),
                 controller: widget.giftLinkController,
                 inputType: TextInputType.text,
