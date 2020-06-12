@@ -193,20 +193,21 @@ class _MyMembersScreenState extends State<MyMembersScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: 75),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.0875),
                     Expanded(
                       child: Stack(
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: 100,
-                              right: 170,
+                            padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height * 0.12,
+                              right: MediaQuery.of(context).size.width * 0.4,
                             ),
                             child: Align(
                               alignment: Alignment.bottomCenter,
                               child: SvgPicture.asset(
                                 'assets/images/undraw_donut_love_kau1.svg',
-                                width: 200,
+                                width: MediaQuery.of(context).size.width * 0.5,
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
@@ -248,14 +249,17 @@ class _MyMembersScreenState extends State<MyMembersScreen> {
             //   height: 15,
             // ),
             Container(
-              padding: EdgeInsets.only(bottom: 10),
-                    child: Column(
-                      children: [
-                        Text(familyName != null ? familyName + ' in ' + selectedEventName : ''),
-                        //Text(familyName),
-                      ],
-                    ),
-                  ),
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.0125),
+              child: Column(
+                children: [
+                  Text(familyName != null
+                      ? familyName + ' in ' + selectedEventName
+                      : ''),
+                  //Text(familyName),
+                ],
+              ),
+            ),
             screenDisplay == 'regular'
                 ? MemberOptionBar(
                     altUid: altUid,
@@ -290,13 +294,15 @@ class _MyMembersScreenState extends State<MyMembersScreen> {
                 : Container(
                     child: Column(
                       children: [
-                        Text(familyName != null ? familyName + ' in ' + selectedEventName : ''),
+                        Text(familyName != null
+                            ? familyName + ' in ' + selectedEventName
+                            : ''),
                         //Text(familyName),
                       ],
                     ),
                   ),
             SizedBox(
-              height: 10,
+              height: MediaQuery.of(context).size.width * 0.019,
             ),
 
             ///
@@ -304,7 +310,7 @@ class _MyMembersScreenState extends State<MyMembersScreen> {
             ///
 
             Container(
-              height: 390,
+              height: MediaQuery.of(context).size.height * 0.4775,
               child: isMembersData == null && selectedEventID != 'no event'
                   ? Center(
                       child: Column(
@@ -457,8 +463,12 @@ class Member extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, bottom: 15),
-      height: 80,
+      margin: EdgeInsets.only(
+        left: MediaQuery.of(context).size.width*0.045,
+        right: MediaQuery.of(context).size.width*0.045,
+        bottom: MediaQuery.of(context).size.height * 0.01775,
+      ),
+      height: MediaQuery.of(context).size.height * 0.09775,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
@@ -500,7 +510,7 @@ class Member extends StatelessWidget {
               Expanded(
                 flex: 45,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.046),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -514,7 +524,7 @@ class Member extends StatelessWidget {
                                   ? Colors.grey
                                   : kPrimaryColor),
                           SizedBox(
-                            width: 15,
+                            width: MediaQuery.of(context).size.width*0.035,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -557,7 +567,7 @@ Widget hexagon(
   Color color,
 ) {
   return Container(
-    width: 60,
+    width: MediaQuery.of(context).size.width*0.139,
     child: ClipPolygon(
       sides: 6,
       borderRadius: 5.0, // Default 0.0 degrees
@@ -606,7 +616,7 @@ Widget memberDelete(
   Function updateScreenFunction,
 ) {
   return Padding(
-    padding: const EdgeInsets.only(right: 20),
+    padding: EdgeInsets.only(right: MediaQuery.of(context).size.height*0.0245),
     child: IconButton(
       icon: Icon(
         Icons.delete_outline,
@@ -692,7 +702,7 @@ class _MemberOptionBarState extends State<MemberOptionBar> {
                   style: kHeadingTextStyle,
                 ),
                 content: Container(
-                  height: 100,
+                  height: MediaQuery.of(context).size.height*0.125,
                   child: Column(
                     children: <Widget>[
                       memberNameInput(
@@ -707,7 +717,7 @@ class _MemberOptionBarState extends State<MemberOptionBar> {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 10),
+                          padding: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.01),
                           child: RaisedButton(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(2),
@@ -772,7 +782,7 @@ class _MemberOptionBarState extends State<MemberOptionBar> {
                     ),
                   ),
                   content: Container(
-                    height: 100,
+                    height: MediaQuery.of(context).size.height*0.125,
                     child: Column(
                       children: <Widget>[
                         displayNameInput(
@@ -787,7 +797,7 @@ class _MemberOptionBarState extends State<MemberOptionBar> {
                         Align(
                           alignment: Alignment.bottomRight,
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 10),
+                            padding: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.01),
                             child: RaisedButton(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(2),
@@ -862,8 +872,8 @@ class MemberOptionButton extends StatelessWidget {
         ? Container()
         : InkWell(
             child: Container(
-              height: 40,
-              width: 160,
+              height: MediaQuery.of(context).size.height*0.05,
+              width: MediaQuery.of(context).size.width*0.35,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: eventId == 'no selected event' || eventId == ''
