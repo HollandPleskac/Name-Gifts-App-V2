@@ -139,7 +139,8 @@ class _ManageEventsScreenState extends State<ManageEventsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: 20),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.025),
                     Expanded(
                       child: Stack(
                         children: <Widget>[
@@ -150,13 +151,16 @@ class _ManageEventsScreenState extends State<ManageEventsScreen> {
                           //   alignment: Alignment.topCenter,
                           // ),
                           Padding(
-                            padding:
-                                const EdgeInsets.only(left: 30, bottom: 80),
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.06,
+                                bottom:
+                                    MediaQuery.of(context).size.height * 0.09),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: SvgPicture.asset(
                                 'assets/images/undraw_online_calendar_kvu2.svg',
-                                width: 140,
+                                width:
+                                    MediaQuery.of(context).size.width * 0.325,
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
@@ -166,7 +170,7 @@ class _ManageEventsScreenState extends State<ManageEventsScreen> {
                             child: Padding(
                               padding: EdgeInsets.only(
                                 top: MediaQuery.of(context).size.height * 0.1,
-                                left: 160,
+                                left: MediaQuery.of(context).size.width * 0.35,
                               ),
                               child: Text(
                                 'Manage Events',
@@ -192,7 +196,7 @@ class _ManageEventsScreenState extends State<ManageEventsScreen> {
             //   ),
             // ),
             SizedBox(
-              height: 20,
+              height: MediaQuery.of(context).size.height * 0.025,
             ),
 
             ///
@@ -217,7 +221,7 @@ class _ManageEventsScreenState extends State<ManageEventsScreen> {
                             style: kHeadingTextStyle,
                           ),
                           content: Container(
-                            height: 150,
+                            height: MediaQuery.of(context).size.height * 0.19,
                             child: Column(
                               children: <Widget>[
                                 displayNameInput(
@@ -241,7 +245,10 @@ class _ManageEventsScreenState extends State<ManageEventsScreen> {
                                 Align(
                                   alignment: Alignment.bottomRight,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 10),
+                                    padding: EdgeInsets.only(
+                                        right:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
                                     child: RaisedButton(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(2),
@@ -414,7 +421,7 @@ class _ManageEventsScreenState extends State<ManageEventsScreen> {
             ///
 
             SizedBox(
-              height: 10,
+              height: MediaQuery.of(context).size.height*0.012,
             ),
 
             ///
@@ -422,7 +429,7 @@ class _ManageEventsScreenState extends State<ManageEventsScreen> {
             ///
 
             Container(
-              height: 320,
+              height: MediaQuery.of(context).size.height * 0.455,
               child: isUserEvents == null
                   ? Center(
                       child: Column(
@@ -546,13 +553,14 @@ class _EventState extends State<Event> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.025),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            height: 78,
+            height: MediaQuery.of(context).size.height*0.1,
             width: MediaQuery.of(context).size.width * 0.9,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -574,7 +582,7 @@ class _EventState extends State<Event> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(left: 30),
+                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.07),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -584,7 +592,7 @@ class _EventState extends State<Event> {
                         widget.eventName,
                       ),
                       SizedBox(
-                        height: 10,
+                        height: MediaQuery.of(context).size.height*0.01,
                       ),
                       eventSubText(
                         context,
@@ -594,7 +602,7 @@ class _EventState extends State<Event> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 35),
+                  padding: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.075),
                   child: IconButton(
                     onPressed: () async {
                       _fire.deleteEvent(widget.uid, widget.eventId);
@@ -671,11 +679,11 @@ Widget topBarButton(BuildContext context, String buttonTitle,
       ? Container()
       : InkWell(
           child: Container(
-            height: 40,
+            height: MediaQuery.of(context).size.height*0.05,
             width: 160,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                //TODO : why button title????
+                //TODO : button title is only needed if invite button is on screen
                 color: buttonTitle == 'Invite to Event' &&
                         (selectedEventId == 'no selected event' ||
                             selectedEventId == '')
