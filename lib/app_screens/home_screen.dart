@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
         .getDocuments()
         .then((value) => value.documents[0].documentID);
     print('FEEEDING UID + ' + uid);
-//TODO : get a way to determine a new alt uid
+
     updateSelectedEventDataInApp(newSelectedEventId, newSelectedEventName);
 
     _fire.setSelectedEvent(uid, selectedEventID);
