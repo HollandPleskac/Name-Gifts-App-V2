@@ -80,7 +80,7 @@ class _TabPageState extends State<TabPage> {
       iconSize: 24,
       padding: padding,
       icon: Icons.event,
-      text: 'Manage Events',
+      text: 'Events',
     ));
 
     tabs.add(GButton(

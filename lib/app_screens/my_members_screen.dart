@@ -830,6 +830,7 @@ class _MemberOptionBarState extends State<MemberOptionBar> {
                                   host: host,
                                   creationDate: creationDate,
                                   inviteType: 'family',
+                                  familyName: widget.familyName,
                                 );
                                 Navigator.pop(context);
                               },

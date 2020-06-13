@@ -240,7 +240,7 @@ class _ManageEventsScreenState extends State<ManageEventsScreen> {
                                     Icons.event_note,
                                     color: kPrimaryColor,
                                   ),
-                                  hintText: 'your name in the new event',
+                                  hintText: 'family name (ex. Doug and Janel)',
                                 ),
                                 Align(
                                   alignment: Alignment.bottomRight,

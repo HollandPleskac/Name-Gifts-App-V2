@@ -519,7 +519,7 @@ class _AcceptInviteToEventState extends State<AcceptInviteToEvent> {
                               Icons.event_note,
                               color: kPrimaryColor,
                             ),
-                            hintText: 'your name in the event',
+                            hintText: 'family name (ex. Doug and Janel)',
                           ),
                           Align(
                             alignment: Alignment.bottomRight,
@@ -581,7 +581,7 @@ class _AcceptInviteToEventState extends State<AcceptInviteToEvent> {
                               Icons.event_note,
                               color: kPrimaryColor,
                             ),
-                            hintText: 'your name in the group',
+                            hintText: 'member name (ex. Holland)',
                           ),
                           Align(
                             alignment: Alignment.bottomRight,
