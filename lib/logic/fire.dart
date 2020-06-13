@@ -50,7 +50,7 @@ class Fire {
   void createAccount(String userUid, String email) {
     _firestore.collection('user data').document(userUid).setData(
       {
-        'email': email,
+        'email': email.toLowerCase(),
         'selected event': 'no selected event',
       },
     );
@@ -267,7 +267,7 @@ class Fire {
   }) async {
     String uidOfPersonRecievingInvite = await _firestore
         .collection('user data')
-        .where('email', isEqualTo: email)
+        .where('email', isEqualTo: email.toLowerCase())
         .getDocuments()
         .then(
           (querySnap) => querySnap.documents[0].documentID.toString(),
