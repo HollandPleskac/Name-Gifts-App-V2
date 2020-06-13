@@ -542,8 +542,9 @@ class _AcceptInviteToEventState extends State<AcceptInviteToEvent> {
                                     inviteType: widget.invitationType,
                                   );
 
-                                  setState(() {});
+                                  
                                   Navigator.pop(context);
+                                  setState(() {});
                                 },
                                 child: Text(
                                   'Join',
@@ -593,6 +594,7 @@ class _AcceptInviteToEventState extends State<AcceptInviteToEvent> {
                                 ),
                                 color: kPrimaryColor,
                                 onPressed: () async {
+                                  print('TRYING TO ACCEPT INVITE');
                                   _fire.acceptInviteToFamily(
                                     displayNameForFamily:
                                         widget.displayNameController.text,
@@ -604,12 +606,17 @@ class _AcceptInviteToEventState extends State<AcceptInviteToEvent> {
                                     hostUid: widget.hostUid,
                                     inviteType: widget.invitationType,
                                   );
-
-                                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  print('DONE ACCEPTING INVITE');
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  print('TRYING TO SET SHARED PREFERENCES');
                                   prefs.setString('alt uid', widget.hostUid);
+                                  print('DONE WITH SETTING SHARED PREFERENCES');
 
-                                  setState(() {});
                                   Navigator.pop(context);
+                                  print('POPPED THE SCREEN');
+                                  setState(() {});
+                                  print('DONE SETTING STATE');
                                 },
                                 child: Text(
                                   'Join',
