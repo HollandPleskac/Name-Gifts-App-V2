@@ -149,9 +149,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: SingleChildScrollView(
-              child: Column(
+        child: Column(
           children: <Widget>[
             ClipPath(
               clipper: MyClipper(),
@@ -192,7 +191,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               alignment: Alignment.bottomCenter,
                               child: SvgPicture.asset(
                                 'assets/images/undraw_online_articles_79ff.svg',
-                                width: MediaQuery.of(context).size.height * 0.245,
+                                width:
+                                    MediaQuery.of(context).size.height * 0.245,
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
@@ -294,8 +294,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     await SharedPreferences.getInstance();
 
                                 // update the alt uid
-                                await prefs.setString('alt uid',
-                                    await _fire.determineSelectedEventType(uid));
+                                await prefs.setString(
+                                    'alt uid',
+                                    await _fire
+                                        .determineSelectedEventType(uid));
                               },
                               hint: Text(
                                 selectedEventDisplay,
@@ -402,24 +404,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: RaisedButton(
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(2),
+                                                        BorderRadius.circular(
+                                                            2),
                                                   ),
                                                   color: kPrimaryColor,
                                                   onPressed: () async {
                                                     //fire invite member
 
-                                                    String host = await _firestore
-                                                        .collection('user data')
-                                                        .document(uid)
-                                                        .get()
-                                                        .then(
-                                                          (docSnap) => docSnap
-                                                              .data['email'],
-                                                        );
+                                                    String host =
+                                                        await _firestore
+                                                            .collection(
+                                                                'user data')
+                                                            .document(uid)
+                                                            .get()
+                                                            .then(
+                                                              (docSnap) =>
+                                                                  docSnap.data[
+                                                                      'email'],
+                                                            );
 
                                                     String creationDate =
                                                         await _firestore
-                                                            .collection('events')
+                                                            .collection(
+                                                                'events')
                                                             .document(
                                                                 selectedEventID)
                                                             .get()
@@ -429,14 +436,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             );
 
                                                     _fire.sendInvite(
-                                                      email:
-                                                          _inviteController.text,
+                                                      email: _inviteController
+                                                          .text,
                                                       eventId: selectedEventID,
                                                       eventName:
                                                           selectedEventDisplay,
                                                       uid: uid,
                                                       host: host,
-                                                      creationDate: creationDate,
+                                                      creationDate:
+                                                          creationDate,
                                                       inviteType: 'event',
                                                     );
                                                     Navigator.pop(context);
@@ -445,8 +453,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fit: BoxFit.contain,
                                                     child: Text(
                                                       'Invite',
-                                                      style:
-                                                          kSubTextStyle.copyWith(
+                                                      style: kSubTextStyle
+                                                          .copyWith(
                                                         color: Colors.white,
                                                         fontSize: 17,
                                                       ),
@@ -593,13 +601,17 @@ Widget familyGrid({
               flex: 1,
               child: Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      Color(0xFF3383CD),
-                      Color(0xFF11249F),
-                    ],
+                  // gradient: LinearGradient(
+                  //   begin: Alignment.topRight,
+                  //   end: Alignment.bottomLeft,
+                  //   colors: [
+                  //     Color(0xFF3383CD),
+                  //     Color(0xFF11249F),
+                  //   ],
+                  // ),
+                  color: Color(0xFF11249F),
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/virus.png'),
                   ),
                 ),
               ),
@@ -639,7 +651,6 @@ Widget familyGrid({
     ),
   );
 }
-
 
 Widget displayNameInput({
   BuildContext context,
