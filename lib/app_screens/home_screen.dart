@@ -601,15 +601,15 @@ Widget familyGrid({
               flex: 1,
               child: Container(
                 decoration: BoxDecoration(
-                  // gradient: LinearGradient(
-                  //   begin: Alignment.topRight,
-                  //   end: Alignment.bottomLeft,
-                  //   colors: [
-                  //     Color(0xFF3383CD),
-                  //     Color(0xFF11249F),
-                  //   ],
-                  // ),
-                  color: Color(0xFF11249F),
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Color(0xFF3383CD),
+                      Color(0xFF11249F),
+                    ],
+                  ),
+                  //color: Color(0xFF11249F),
                   image: DecorationImage(
                     image: AssetImage('assets/images/virus.png'),
                   ),
