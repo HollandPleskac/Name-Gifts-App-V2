@@ -197,11 +197,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Align(
                           alignment: Alignment.topCenter,
-                          child: AutoSizeText(
+                          child: Text(
                             'View Selected Event',
                             style: kHeadingTextStyle.copyWith(
                               color: Colors.white,
-                              fontSize: 32,
+                              fontSize: MediaQuery.of(context).size.width*0.08,
                             ),
                             maxLines: 1,
                           ),
