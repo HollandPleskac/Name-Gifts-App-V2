@@ -500,23 +500,39 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         default:
                           return Center(
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              physics: BouncingScrollPhysics(),
-                              children: snapshot.data.documents.map(
-                                (DocumentSnapshot document) {
-                                  return family(
-                                    context: context,
-                                    familyName: document['family name'],
-                                    gifts: document['gifts'],
-                                    members: document['members'],
-                                    uid: uid,
-                                    selectedEvent: selectedEvent,
-                                    selectedEventId: selectedEventID,
-                                    familyUid: document.documentID,
-                                  );
-                                },
-                              ).toList(),
+                            // child: ListView(
+                            //   scrollDirection: Axis.horizontal,
+                            //   physics: BouncingScrollPhysics(),
+                            //   children: snapshot.data.documents.map(
+                            //     (DocumentSnapshot document) {
+                            //       return family(
+                            //         context: context,
+                            //         familyName: document['family name'],
+                            //         gifts: document['gifts'],
+                            //         members: document['members'],
+                            //         uid: uid,
+                            //         selectedEvent: selectedEvent,
+                            //         selectedEventId: selectedEventID,
+                            //         familyUid: document.documentID,
+                            //       );
+                            //     },
+                            //   ).toList(),
+                            // ),
+                            child: GridView.count(
+                              primary: false,
+                              padding: const EdgeInsets.all(40),
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 15,
+                              crossAxisCount: 2,
+                              children: snapshot.data.documents
+                                  .map((DocumentSnapshot document) {
+                                return familyGrid(
+                                  familyName: document['family name'],
+                                  familyUID: document.documentID,
+                                  context: context,
+                                  selectedEventId: selectedEventID,
+                                );
+                              }).toList(),
                             ),
                           );
                       }
@@ -558,195 +574,69 @@ class MyClipper extends CustomClipper<Path> {
   }
 }
 
-Widget family({
-  BuildContext context,
+Widget familyGrid({
   String familyName,
-  int gifts,
-  int members,
-  String uid,
-  String selectedEvent,
+  String familyUID,
+  BuildContext context,
   String selectedEventId,
-  String familyUid,
 }) {
-  return Padding(
-    padding: EdgeInsets.symmetric(
-        horizontal: MediaQuery.of(context).size.width * 0.022),
+  return InkWell(
     child: Container(
-      // height: 250, do not need height because height is calculated from height of listview
-      width: MediaQuery.of(context).size.width * 0.95,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          topLeft: Radius.circular(20),
-        ),
-        //boxShadow: [
-        //BoxShadow(
-        //blurRadius: 2,
-        //offset: Offset(8, 8),
-        //color: Color(000000).withOpacity(.2),
-        //spreadRadius: -5),
-        //],
-      ),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20),
-            topLeft: Radius.circular(20),
-          ),
-        ),
-        child: Stack(
+        elevation: 2,
+        child: Column(
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                profilePic(context),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.047,
-                    top: MediaQuery.of(context).size.height * 0.04,
+            Expanded(
+              flex: 1,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Color(0xFF3383CD),
+                      Color(0xFF11249F),
+                    ],
                   ),
-                  child: text(context, familyName),
                 ),
-              ],
+              ),
             ),
-            Positioned(
-              bottom: MediaQuery.of(context).size.height * 0.038,
-              left: MediaQuery.of(context).size.width * 0.088,
-              child: information(context, members, gifts),
-            ),
-            Positioned(
-              bottom: MediaQuery.of(context).size.width * 0.035,
-              right: MediaQuery.of(context).size.width * 0.04,
-              child: ViewButton(
-                uid: uid,
-                eventName: selectedEvent,
-                familyName: familyName,
-                selectedEventId: selectedEventId,
-                familyUid: familyUid,
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: Colors.white,
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      left: 10,
+                    ),
+                    child: Text(
+                      familyName,
+                      style: kSubTextStyle.copyWith(
+                          color: Colors.black, fontSize: 15.5),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
         ),
       ),
     ),
-  );
-}
-
-Widget profilePic(BuildContext context) {
-  return Container(
-    height: MediaQuery.of(context).size.height * 0.16,
-    width: MediaQuery.of(context).size.height * 0.16,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(25),
-      border: Border.all(
-        color: Colors.black,
-        width: 3,
-      ),
-    ),
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(23),
-      child: Image.network(
-        //'https://i.pinimg.com/originals/9e/e8/9f/9ee89f7623acc78fc33fc0cbaf3a014b.jpg',
-        'https://free4kwallpapers.com/uploads/originals/2020/01/07/animated-colorful-landscape-wallpaper.jpg',
-        //height: 250, do not need a height
-        width: double.infinity,
-        fit: BoxFit.cover,
-      ),
+    onTap: () => Navigator.pushNamed(
+      context,
+      ViewMembersScreen.routeName,
+      arguments: {
+        'family name': familyName,
+        'family uid': familyUID,
+        'selected event id': selectedEventId,
+      },
     ),
   );
 }
 
-Widget text(BuildContext context, String name) {
-  return Text(
-    name,
-    style: kHeadingTextStyle.copyWith(color: Colors.black, fontSize: MediaQuery.of(context).size.height*0.038),
-  );
-}
-
-Widget information(BuildContext context, int members, int gifts) {
-  return Row(
-    children: <Widget>[
-      Row(
-        children: <Widget>[
-          Text(
-            members.toString(),
-            style: kHeadingTextStyle.copyWith(
-              color: Color(0xFF3383CD),
-              fontSize: MediaQuery.of(context).size.width*0.08,
-            ),
-          ),
-          Text(
-            ' Members',
-            style: kSubTextStyle.copyWith(),
-          ),
-        ],
-      ),
-      SizedBox(
-        width: MediaQuery.of(context).size.width * 0.05,
-      ),
-      Row(
-        children: <Widget>[
-          Text(
-            gifts.toString(),
-            style: kHeadingTextStyle.copyWith(
-              color: Color(0xFF3383CD),
-              fontSize: MediaQuery.of(context).size.width*0.08,
-            ),
-          ),
-          Text(
-            ' Gifts',
-            style: kSubTextStyle.copyWith(),
-          ),
-        ],
-      ),
-    ],
-  );
-}
-
-class ViewButton extends StatelessWidget {
-  final String eventName;
-  final String uid;
-  final String familyName;
-  final String selectedEventId;
-  final String familyUid;
-
-  ViewButton({
-    this.eventName,
-    this.uid,
-    this.familyName,
-    this.selectedEventId,
-    @required this.familyUid,
-  });
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.05,
-      width: MediaQuery.of(context).size.width * 0.2,
-      child: FlatButton(
-        onPressed: () async {
-          print('push');
-          Navigator.pushNamed(
-            context,
-            ViewMembersScreen.routeName,
-            arguments: {
-              'family name': familyName,
-              'family uid': familyUid,
-              'selected event id': selectedEventId,
-            },
-          );
-        },
-        color: Colors.blueAccent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            8,
-          ),
-        ),
-        child: Text('View', style: kSubTextStyle.copyWith(color: Colors.white)),
-      ),
-    );
-  }
-}
 
 Widget displayNameInput({
   BuildContext context,
