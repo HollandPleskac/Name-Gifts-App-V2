@@ -41,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (_passwordController.text == _passwordConfirmController.text) {
       List authPackage = await _auth.signUp(
         context,
-        _emailController.text,
+        _emailController.text.toLowerCase(),
         _passwordController.text,
       );
 
@@ -112,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.0725,
               ),
-              signInInput(
+              signUpInput(
                 context: context,
                 controller: _emailController,
                 hintText: 'email',
@@ -122,11 +122,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 keyboardType: TextInputType.emailAddress,
                 obscureText: false,
+                textCapitalization: TextCapitalization.none
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
-              signInInput(
+              signUpInput(
                 context: context,
                 controller: _passwordController,
                 hintText: 'password',
@@ -136,11 +137,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
+                textCapitalization: TextCapitalization.none
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
-              signInInput(
+              signUpInput(
                 context: context,
                 controller: _passwordConfirmController,
                 hintText: 'confirm password',
@@ -150,6 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
+                textCapitalization: TextCapitalization.none
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.009,
@@ -182,13 +185,14 @@ Widget signInText(BuildContext context) {
   );
 }
 
-Widget signInInput({
+Widget signUpInput({
   BuildContext context,
   String hintText,
   Icon icon,
   TextInputType keyboardType,
   TextEditingController controller,
   bool obscureText,
+  TextCapitalization textCapitalization,
 }) {
   return Center(
     child: Container(

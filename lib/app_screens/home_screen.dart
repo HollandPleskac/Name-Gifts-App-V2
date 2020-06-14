@@ -149,408 +149,411 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          ClipPath(
-            clipper: MyClipper(),
-            child: Container(
-              padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.1,
-                top: MediaQuery.of(context).size.height * 0.06,
-                right: MediaQuery.of(context).size.width * 0.05,
-              ),
-              height: MediaQuery.of(context).size.height * 0.39,
-              //height:350
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFF3383CD),
-                    Color(0xFF11249F),
-                  ],
-                ),
-                // image: DecorationImage(
-                //   image: AssetImage("assets/images/virus.png"),
-                // ),
-              ),
+      
+      body: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                  Expanded(
-                    child: Stack(
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(
-                              bottom:
-                                  MediaQuery.of(context).size.height * 0.07),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: SvgPicture.asset(
-                              'assets/images/undraw_online_articles_79ff.svg',
-                              width: MediaQuery.of(context).size.height * 0.245,
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.topCenter,
-                          child: Text(
-                            'View Selected Event',
-                            style: kHeadingTextStyle.copyWith(
-                              color: Colors.white,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.08,
-                            ),
-                            maxLines: 1,
-                          ),
-                        ),
-                      ],
-                    ),
+          children: <Widget>[
+            ClipPath(
+              clipper: MyClipper(),
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.1,
+                  top: MediaQuery.of(context).size.height * 0.06,
+                  right: MediaQuery.of(context).size.width * 0.05,
+                ),
+                height: MediaQuery.of(context).size.height * 0.39,
+                //height:350
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFF3383CD),
+                      Color(0xFF11249F),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          ),
-
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.011,
-          ),
-          ////
-          ////
-          ////
-          Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.045,
-            ),
-            padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.height * 0.02,
-              horizontal: MediaQuery.of(context).size.width * 0.045,
-            ),
-            height: MediaQuery.of(context).size.height * 0.073,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(25),
-              border: Border.all(
-                color: Color(0xFFE5E5E5),
-              ),
-            ),
-            child: StreamBuilder<QuerySnapshot>(
-                stream: Firestore.instance
-                    .collection("user data")
-                    .document(uid)
-                    .collection('my events')
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData)
-                    return Text("Loading.....");
-                  else {
-                    List<DropdownMenuItem> dropdownEvents = [];
-                    for (int i = 0; i < snapshot.data.documents.length; i++) {
-                      DocumentSnapshot documentSnapshot =
-                          snapshot.data.documents[i];
-                      dropdownEvents.add(
-                        DropdownMenuItem(
-                          child: Text(
-                            documentSnapshot['event name'],
-                            style: kSubTextStyle.copyWith(
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          value: "${documentSnapshot['event name']}",
-                        ),
-                      );
-                    }
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.event,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.045,
-                        ),
-                        Expanded(
-                          child: DropdownButton(
-                            isExpanded: true,
-                            underline: SizedBox(),
-                            icon: Container(
-                              margin: EdgeInsets.only(top: 2),
-                              child: Icon(Icons.arrow_drop_down),
-                            ),
-                            value: selectedEvent,
-                            items: dropdownEvents,
-                            onChanged: (newEventSelected) async {
-                              await setSelectedEventIdInFirestore(
-                                newEventSelected,
-                              );
-                              SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
-
-                              // update the alt uid
-                              await prefs.setString('alt uid',
-                                  await _fire.determineSelectedEventType(uid));
-                            },
-                            hint: Text(
-                              selectedEventDisplay,
-                              style: TextStyle(
-                                color: Colors.black,
+                  // image: DecorationImage(
+                  //   image: AssetImage("assets/images/virus.png"),
+                  // ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                    Expanded(
+                      child: Stack(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).size.height * 0.07),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: SvgPicture.asset(
+                                'assets/images/undraw_online_articles_79ff.svg',
+                                width: MediaQuery.of(context).size.height * 0.245,
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  }
-                }),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.028),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.045),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Families\n",
-                            style: kTitleTextstyle,
-                          ),
-                          TextSpan(
-                            text: selectedEventDisplay,
-                            style: TextStyle(
-                              color: kTextLightColor,
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: Text(
+                              'View Selected Event',
+                              style: kHeadingTextStyle.copyWith(
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.08,
+                              ),
+                              maxLines: 1,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Spacer(),
-                    // TODO : invite a group to the current event
-                    IconButton(
-                      icon: Icon(
-                        Icons.add,
-                        color: (selectedEventID == 'no selected event' ||
-                                selectedEventID == '')
-                            ? Colors.grey
-                            : Colors.black,
+                  ],
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.011,
+            ),
+            ////
+            ////
+            ////
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.045,
+              ),
+              padding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.height * 0.02,
+                horizontal: MediaQuery.of(context).size.width * 0.045,
+              ),
+              height: MediaQuery.of(context).size.height * 0.073,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(
+                  color: Color(0xFFE5E5E5),
+                ),
+              ),
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: Firestore.instance
+                      .collection("user data")
+                      .document(uid)
+                      .collection('my events')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData)
+                      return Text("Loading.....");
+                    else {
+                      List<DropdownMenuItem> dropdownEvents = [];
+                      for (int i = 0; i < snapshot.data.documents.length; i++) {
+                        DocumentSnapshot documentSnapshot =
+                            snapshot.data.documents[i];
+                        dropdownEvents.add(
+                          DropdownMenuItem(
+                            child: Text(
+                              documentSnapshot['event name'],
+                              style: kSubTextStyle.copyWith(
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            value: "${documentSnapshot['event name']}",
+                          ),
+                        );
+                      }
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.event,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.045,
+                          ),
+                          Expanded(
+                            child: DropdownButton(
+                              isExpanded: true,
+                              underline: SizedBox(),
+                              icon: Container(
+                                margin: EdgeInsets.only(top: 2),
+                                child: Icon(Icons.arrow_drop_down),
+                              ),
+                              value: selectedEvent,
+                              items: dropdownEvents,
+                              onChanged: (newEventSelected) async {
+                                await setSelectedEventIdInFirestore(
+                                  newEventSelected,
+                                );
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+
+                                // update the alt uid
+                                await prefs.setString('alt uid',
+                                    await _fire.determineSelectedEventType(uid));
+                              },
+                              hint: Text(
+                                selectedEventDisplay,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  }),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.028),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.045),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Families\n",
+                              style: kTitleTextstyle,
+                            ),
+                            TextSpan(
+                              text: selectedEventDisplay,
+                              style: TextStyle(
+                                color: kTextLightColor,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      onPressed: (selectedEventID == 'no selected event' ||
-                              selectedEventID == '')
-                          ? null
-                          : () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    title: RichText(
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: "Invite Family to : \n",
-                                            style: kHeadingTextStyle.copyWith(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.048,
-                                              color: Colors.black,
+                      Spacer(),
+                      // TODO : invite a group to the current event
+                      IconButton(
+                        icon: Icon(
+                          Icons.add,
+                          color: (selectedEventID == 'no selected event' ||
+                                  selectedEventID == '')
+                              ? Colors.grey
+                              : Colors.black,
+                        ),
+                        onPressed: (selectedEventID == 'no selected event' ||
+                                selectedEventID == '')
+                            ? null
+                            : () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      title: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: "Invite Family to : \n",
+                                              style: kHeadingTextStyle.copyWith(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.048,
+                                                color: Colors.black,
+                                              ),
                                             ),
-                                          ),
-                                          TextSpan(
-                                            text: selectedEventDisplay,
-                                            style: kHeadingTextStyle.copyWith(
-                                              color: Colors.black,
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.048,
+                                            TextSpan(
+                                              text: selectedEventDisplay,
+                                              style: kHeadingTextStyle.copyWith(
+                                                color: Colors.black,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.048,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    content: Container(
-                                      height: 100,
-                                      child: Column(
-                                        children: <Widget>[
-                                          displayNameInput(
-                                            context: context,
-                                            controller: _inviteController,
-                                            icon: Icon(
-                                              Icons.email,
-                                              color: kPrimaryColor,
-                                            ),
-                                            hintText: 'email of recipient',
-                                          ),
-                                          Align(
-                                            alignment: Alignment.bottomRight,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10),
-                                              child: RaisedButton(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(2),
-                                                ),
+                                      content: Container(
+                                        height: 100,
+                                        child: Column(
+                                          children: <Widget>[
+                                            displayNameInput(
+                                              context: context,
+                                              controller: _inviteController,
+                                              icon: Icon(
+                                                Icons.email,
                                                 color: kPrimaryColor,
-                                                onPressed: () async {
-                                                  //fire invite member
+                                              ),
+                                              hintText: 'email of recipient',
+                                            ),
+                                            Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 10),
+                                                child: RaisedButton(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(2),
+                                                  ),
+                                                  color: kPrimaryColor,
+                                                  onPressed: () async {
+                                                    //fire invite member
 
-                                                  String host = await _firestore
-                                                      .collection('user data')
-                                                      .document(uid)
-                                                      .get()
-                                                      .then(
-                                                        (docSnap) => docSnap
-                                                            .data['email'],
-                                                      );
+                                                    String host = await _firestore
+                                                        .collection('user data')
+                                                        .document(uid)
+                                                        .get()
+                                                        .then(
+                                                          (docSnap) => docSnap
+                                                              .data['email'],
+                                                        );
 
-                                                  String creationDate =
-                                                      await _firestore
-                                                          .collection('events')
-                                                          .document(
-                                                              selectedEventID)
-                                                          .get()
-                                                          .then(
-                                                            (docSnap) => docSnap[
-                                                                'creation date'],
-                                                          );
+                                                    String creationDate =
+                                                        await _firestore
+                                                            .collection('events')
+                                                            .document(
+                                                                selectedEventID)
+                                                            .get()
+                                                            .then(
+                                                              (docSnap) => docSnap[
+                                                                  'creation date'],
+                                                            );
 
-                                                  _fire.sendInvite(
-                                                    email:
-                                                        _inviteController.text,
-                                                    eventId: selectedEventID,
-                                                    eventName:
-                                                        selectedEventDisplay,
-                                                    uid: uid,
-                                                    host: host,
-                                                    creationDate: creationDate,
-                                                    inviteType: 'event',
-                                                  );
-                                                  Navigator.pop(context);
-                                                },
-                                                child: FittedBox(
-                                                  fit: BoxFit.contain,
-                                                  child: Text(
-                                                    'Invite',
-                                                    style:
-                                                        kSubTextStyle.copyWith(
-                                                      color: Colors.white,
-                                                      fontSize: 17,
+                                                    _fire.sendInvite(
+                                                      email:
+                                                          _inviteController.text,
+                                                      eventId: selectedEventID,
+                                                      eventName:
+                                                          selectedEventDisplay,
+                                                      uid: uid,
+                                                      host: host,
+                                                      creationDate: creationDate,
+                                                      inviteType: 'event',
+                                                    );
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: FittedBox(
+                                                    fit: BoxFit.contain,
+                                                    child: Text(
+                                                      'Invite',
+                                                      style:
+                                                          kSubTextStyle.copyWith(
+                                                        color: Colors.white,
+                                                        fontSize: 17,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                    ),
-                    // Text(
-                    //   "View Event",
-                    //   style: TextStyle(
-                    //     color: kPrimaryColor,
-                    //     fontWeight: FontWeight.w600,
-                    //   ),
-                    // ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.028,
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.31,
-            child: isEventData == null
-                ? Center(
-                    child: Text('No events'),
-                  )
-                : StreamBuilder(
-                    stream: _firestore
-                        .collection("events")
-                        .document(selectedEventID)
-                        .collection('event members')
-                        .snapshots(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasError)
-                        return Text('Error: ${snapshot.error}');
-
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.waiting:
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        default:
-                          return Center(
-                            // child: ListView(
-                            //   scrollDirection: Axis.horizontal,
-                            //   physics: BouncingScrollPhysics(),
-                            //   children: snapshot.data.documents.map(
-                            //     (DocumentSnapshot document) {
-                            //       return family(
-                            //         context: context,
-                            //         familyName: document['family name'],
-                            //         gifts: document['gifts'],
-                            //         members: document['members'],
-                            //         uid: uid,
-                            //         selectedEvent: selectedEvent,
-                            //         selectedEventId: selectedEventID,
-                            //         familyUid: document.documentID,
-                            //       );
-                            //     },
-                            //   ).toList(),
-                            // ),
-                            child: GridView.count(
-                              primary: false,
-                              padding: const EdgeInsets.all(40),
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 15,
-                              crossAxisCount: 2,
-                              children: snapshot.data.documents
-                                  .map((DocumentSnapshot document) {
-                                return familyGrid(
-                                  familyName: document['family name'],
-                                  familyUID: document.documentID,
-                                  context: context,
-                                  selectedEventId: selectedEventID,
+                                    );
+                                  },
                                 );
-                              }).toList(),
-                            ),
-                          );
-                      }
-                    },
+                              },
+                      ),
+                      // Text(
+                      //   "View Event",
+                      //   style: TextStyle(
+                      //     color: kPrimaryColor,
+                      //     fontWeight: FontWeight.w600,
+                      //   ),
+                      // ),
+                    ],
                   ),
-          ),
-          // Container(
-          //   height: 250,
-          //   child: ListView(
-          //     scrollDirection: Axis.horizontal,
-          //     physics: BouncingScrollPhysics(),
-          //     children: <Widget>[
-          //       family(context),
-          //       family(context),
-          //     ],
-          //   ),
-          // ),
-        ],
+                ],
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.028,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.31,
+              child: isEventData == null
+                  ? Center(
+                      child: Text('No events'),
+                    )
+                  : StreamBuilder(
+                      stream: _firestore
+                          .collection("events")
+                          .document(selectedEventID)
+                          .collection('event members')
+                          .snapshots(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasError)
+                          return Text('Error: ${snapshot.error}');
+
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.waiting:
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          default:
+                            return Center(
+                              // child: ListView(
+                              //   scrollDirection: Axis.horizontal,
+                              //   physics: BouncingScrollPhysics(),
+                              //   children: snapshot.data.documents.map(
+                              //     (DocumentSnapshot document) {
+                              //       return family(
+                              //         context: context,
+                              //         familyName: document['family name'],
+                              //         gifts: document['gifts'],
+                              //         members: document['members'],
+                              //         uid: uid,
+                              //         selectedEvent: selectedEvent,
+                              //         selectedEventId: selectedEventID,
+                              //         familyUid: document.documentID,
+                              //       );
+                              //     },
+                              //   ).toList(),
+                              // ),
+                              child: GridView.count(
+                                primary: false,
+                                padding: const EdgeInsets.all(40),
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 15,
+                                crossAxisCount: 2,
+                                children: snapshot.data.documents
+                                    .map((DocumentSnapshot document) {
+                                  return familyGrid(
+                                    familyName: document['family name'],
+                                    familyUID: document.documentID,
+                                    context: context,
+                                    selectedEventId: selectedEventID,
+                                  );
+                                }).toList(),
+                              ),
+                            );
+                        }
+                      },
+                    ),
+            ),
+            // Container(
+            //   height: 250,
+            //   child: ListView(
+            //     scrollDirection: Axis.horizontal,
+            //     physics: BouncingScrollPhysics(),
+            //     children: <Widget>[
+            //       family(context),
+            //       family(context),
+            //     ],
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }
