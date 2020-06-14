@@ -201,7 +201,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             'View Selected Event',
                             style: kHeadingTextStyle.copyWith(
                               color: Colors.white,
-                              fontSize: MediaQuery.of(context).size.width*0.08,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.08,
                             ),
                             maxLines: 1,
                           ),
@@ -358,7 +359,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                           TextSpan(
                                             text: "Invite Family to : \n",
                                             style: kHeadingTextStyle.copyWith(
-                                              fontSize: 20,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.048,
                                               color: Colors.black,
                                             ),
                                           ),
@@ -366,7 +370,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                             text: selectedEventDisplay,
                                             style: kHeadingTextStyle.copyWith(
                                               color: Colors.black,
-                                              fontSize: 20,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.048,
                                             ),
                                           ),
                                         ],
@@ -432,11 +439,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   );
                                                   Navigator.pop(context);
                                                 },
-                                                child: Text(
-                                                  'Invite',
-                                                  style: kSubTextStyle.copyWith(
+                                                child: FittedBox(
+                                                  fit: BoxFit.contain,
+                                                  child: Text(
+                                                    'Invite',
+                                                    style:
+                                                        kSubTextStyle.copyWith(
                                                       color: Colors.white,
-                                                      fontSize: 17),
+                                                      fontSize: 17,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -648,7 +660,7 @@ Widget profilePic(BuildContext context) {
 Widget text(BuildContext context, String name) {
   return Text(
     name,
-    style: kHeadingTextStyle.copyWith(color: Colors.black, fontSize: 28),
+    style: kHeadingTextStyle.copyWith(color: Colors.black, fontSize: MediaQuery.of(context).size.height*0.038),
   );
 }
 
@@ -661,7 +673,7 @@ Widget information(BuildContext context, int members, int gifts) {
             members.toString(),
             style: kHeadingTextStyle.copyWith(
               color: Color(0xFF3383CD),
-              fontSize: 32,
+              fontSize: MediaQuery.of(context).size.width*0.08,
             ),
           ),
           Text(
@@ -679,7 +691,7 @@ Widget information(BuildContext context, int members, int gifts) {
             gifts.toString(),
             style: kHeadingTextStyle.copyWith(
               color: Color(0xFF3383CD),
-              fontSize: 32,
+              fontSize: MediaQuery.of(context).size.width*0.08,
             ),
           ),
           Text(
