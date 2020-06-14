@@ -39,6 +39,8 @@ dependencies:
   flutter_svg: ^0.17.4
   intl: ^0.16.1
   url_launcher: ^5.4.10
+  auto_size_text: ^2.1.0
+
 
 dev_dependencies:
   flutter_test:

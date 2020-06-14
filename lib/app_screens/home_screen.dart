@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '../logic/fire.dart';
 import '../constant.dart';
@@ -196,12 +197,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Align(
                           alignment: Alignment.topCenter,
-                          child: Text(
+                          child: AutoSizeText(
                             'View Selected Event',
                             style: kHeadingTextStyle.copyWith(
                               color: Colors.white,
                               fontSize: 32,
                             ),
+                            maxLines: 1,
                           ),
                         ),
                       ],
