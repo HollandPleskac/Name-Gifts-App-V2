@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
       selectedEventDisplay = selEventName;
       print(selectedEventDisplay);
     } catch (e) {
-      selectedEventDisplay = 'No events';
+      selectedEventDisplay = 'No selected event';
     }
   }
 
@@ -490,7 +490,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: MediaQuery.of(context).size.height * 0.31,
               child: isEventData == null
                   ? Center(
-                      child: Text('No events'),
+                      child: Text('No groups'),
                     )
                   : StreamBuilder(
                       stream: _firestore
