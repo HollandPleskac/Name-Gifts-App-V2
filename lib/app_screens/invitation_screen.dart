@@ -68,20 +68,21 @@ class _InvitationScreenState extends State<InvitationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: MediaQuery.of(context).size.height*0.025),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.025),
                     Expanded(
                       child: Stack(
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).size.height*0.11,
-                              left: MediaQuery.of(context).size.width*0.08,
+                              bottom: MediaQuery.of(context).size.height * 0.11,
+                              left: MediaQuery.of(context).size.width * 0.08,
                             ),
                             child: Align(
                               alignment: Alignment.bottomLeft,
                               child: SvgPicture.asset(
                                 'assets/images/undraw_invite_i6u7.svg',
-                                width: MediaQuery.of(context).size.width*0.35,
+                                width: MediaQuery.of(context).size.width * 0.35,
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
@@ -95,7 +96,10 @@ class _InvitationScreenState extends State<InvitationScreen> {
                               child: Text(
                                 'My Invitations',
                                 style: kHeadingTextStyle.copyWith(
-                                    color: Colors.white, fontSize: MediaQuery.of(context).size.width * 0.08),
+                                    color: Colors.white,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.08),
                               ),
                             ),
                           ),
@@ -107,8 +111,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
               ),
             ),
             Container(
-              
-              height: MediaQuery.of(context).size.height*0.54,
+              height: MediaQuery.of(context).size.height * 0.54,
               child: StreamBuilder(
                 stream: _firestore
                     .collection("user data")
@@ -135,21 +138,16 @@ class _InvitationScreenState extends State<InvitationScreen> {
                             physics: BouncingScrollPhysics(),
                             children: snapshot.data.documents.map(
                               (DocumentSnapshot document) {
-                                return Column(
-                                  children: [
-                                    Invitation(
-                                      eventCreationDate: document['creation date'],
-                                      hostEmail: document['host'],
-                                      invitationType: document['invite type'],
-                                      eventName: document['event name'],
-                                      uid: uid,
-                                      invitationEventId: document.documentID,
-                                      displayNameController: _displayNameController,
-                                      familyName: document['family name'],
-                                      hostUid: document['host uid'],
-                                    ),
-                                    Text('test'),
-                                  ],
+                                return Invitation(
+                                  eventCreationDate: document['creation date'],
+                                  hostEmail: document['host'],
+                                  invitationType: document['invite type'],
+                                  eventName: document['event name'],
+                                  uid: uid,
+                                  invitationEventId: document.documentID,
+                                  displayNameController: _displayNameController,
+                                  familyName: document['family name'],
+                                  hostUid: document['host uid'],
                                 );
                               },
                             ).toList(),
@@ -248,11 +246,11 @@ class Invitation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height*0.245,
+      height: MediaQuery.of(context).size.height * 0.245,
       margin: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height*0.025,
-        left: MediaQuery.of(context).size.width*0.038,
-        right: MediaQuery.of(context).size.width*0.038,
+        bottom: MediaQuery.of(context).size.height * 0.025,
+        left: MediaQuery.of(context).size.width * 0.038,
+        right: MediaQuery.of(context).size.width * 0.038,
       ),
       width: MediaQuery.of(context).size.width * 0.9,
       child: Row(
@@ -311,7 +309,7 @@ Widget invitationCard({
         ),
       ),
       Container(
-        height: MediaQuery.of(context).size.height*0.195,
+        height: MediaQuery.of(context).size.height * 0.195,
         width: double.infinity,
         child: Card(
           elevation: 0.6,
@@ -322,14 +320,14 @@ Widget invitationCard({
               Row(
                 children: <Widget>[
                   SizedBox(
-                    width: MediaQuery.of(context).size.width*0.033,
+                    width: MediaQuery.of(context).size.width * 0.033,
                   ),
                   Icon(
                     Icons.insert_invitation,
                     color: kPrimaryColor,
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width*0.025,
+                    width: MediaQuery.of(context).size.width * 0.025,
                   ),
                   Text(
                     eventName.toString(),
@@ -343,14 +341,14 @@ Widget invitationCard({
               Row(
                 children: <Widget>[
                   SizedBox(
-                    width: MediaQuery.of(context).size.width*0.033,
+                    width: MediaQuery.of(context).size.width * 0.033,
                   ),
                   Icon(
                     Icons.email,
                     color: kPrimaryColor,
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width*0.025,
+                    width: MediaQuery.of(context).size.width * 0.025,
                   ),
                   Text(
                     hostEmail,
@@ -401,7 +399,7 @@ class InvitationActions extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Container(
-          height: MediaQuery.of(context).size.height*0.195,
+          height: MediaQuery.of(context).size.height * 0.195,
           width: double.infinity,
           child: Card(
             color: kPrimaryColor,
@@ -548,7 +546,6 @@ class _AcceptInviteToEventState extends State<AcceptInviteToEvent> {
                                     inviteType: widget.invitationType,
                                   );
 
-                                  
                                   Navigator.pop(context);
                                   setState(() {});
                                 },
